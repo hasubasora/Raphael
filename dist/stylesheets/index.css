@@ -1,0 +1,11 @@
+.class {
+  background: #666;
+}
+h1 {
+  background: #666;
+  color: red;
+  border: 1px solid red;
+}
+body {
+  background: red;
+}
