@@ -4,6 +4,7 @@ const gulp = require('gulp'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
+    concat = require('gulp-concat'),
     rename = require('gulp-rename');
 
 //启动默认
@@ -12,10 +13,22 @@ gulp.task('default', () => {
     return runSequence(['clean'], ['build'], ['serve', 'watch']);
 })
 
-// less
+// 编译less
 gulp.task('fsLess', () => {
-    gulp.src(['src/less/*.less', '!src/less/**/{reset,test}.less'])
+    gulp.src(['src/less/**/*.less', '!src/less/**/{reset,test}.less'])
         .pipe(less())
+        .on('error', function(e) {
+            console.log(e);
+        })
+        .pipe(gulp.dest('./src/stylesheets/'));
+
+});
+
+//合并css
+gulp.task('hbLess', () => {
+    gulp.src('src/stylesheets/*.css')
+        // 合并文件
+        .pipe(concat('main.css'))
         .pipe(gulp.dest('./dist/stylesheets/'))
         .pipe(rename({ suffix: '.min' }))
         //压缩样式文件
@@ -25,8 +38,9 @@ gulp.task('fsLess', () => {
 });
 
 gulp.task('build', function(callback) {
-    return runSequence(['fsLess', 'staticFiles'], callback);
+    return runSequence(['fsLess', 'hbLess', 'staticFiles'], callback);
 });
+
 gulp.task('staticFiles', function() {
     return gulp.src([
             './src/**/*.html',

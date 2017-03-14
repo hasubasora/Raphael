@@ -1,13 +1,16 @@
-.class{
-background:#666;
-}
-h1{
-.class;
-color: @color;
-border: 1px solid red;
 
-}
-@color:red;
-body{
-    background: @color;
-}
+
+/* 变量存放 */
+@import url("extend/Helpers/variables.less");
+/* 方法存放 */
+@import url("extend/Helpers/mixins.less");
+
+/* 头尾样式 */
+@import url("extend/layout/header.less");
+@import url("extend/layout/main.less");
+@import url("extend/layout/footer.less");
+/* 计算文件 */
+
+
+/* 通用文件 */
+@import url("extend/reset.less");
