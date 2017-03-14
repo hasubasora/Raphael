@@ -1,9 +1,16 @@
-
 /* 变量存放 */
 /* 方法存放 */
 /* 头尾样式 */
 header {
   background: yellow;
+}
+div {
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+.button {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
 }
 footer {
   background: gray;

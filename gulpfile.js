@@ -1,6 +1,7 @@
 const gulp = require('gulp'),
     less = require('gulp-less'),
     minifyCss = require('gulp-minify-css'),
+    autoprefixer = require('gulp-autoprefixer'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
@@ -20,13 +21,32 @@ gulp.task('fsLess', () => {
         .on('error', function(e) {
             console.log(e);
         })
+        .pipe(autoprefixer({
+            browsers: [
+                'last 22 versions',
+                'Android >= 4.0',
+                'last 5 Chrome versions',
+                'last 5 Explorer versions',
+                'last 3 Safari versions',
+                'Firefox >= 20',
+                'iOS 7',
+                'Firefox ESR',
+                'Explorer >= 8',
+                'Opera >= 42',
+                'Safari >= 8',
+                'last 5 FirefoxAndroid versions',
+                'last 5 ChromeAndroid versions',
+                'last 5 ExplorerMobile versions'
+            ],
+            cascade: false
+        }))
         .pipe(gulp.dest('./src/stylesheets/'));
 
 });
 
 //合并css
 gulp.task('hbLess', () => {
-    gulp.src('src/stylesheets/*.css')
+    gulp.src('src/stylesheets/index.css')
         // 合并文件
         .pipe(concat('main.css'))
         .pipe(gulp.dest('./dist/stylesheets/'))
