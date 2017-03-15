@@ -57,6 +57,7 @@ gulp.task('hbLess', () => {
         .pipe(gulp.dest('./dist/stylesheets/'));
 });
 
+// 入口
 gulp.task('build', function(callback) {
     return runSequence(['fsLess', 'hbLess', 'staticFiles'], callback);
 });
